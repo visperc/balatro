@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/autoload/main_scene.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/gameplay/balatro_run.gd" id="2_run"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_main")
+run_script = ExtResource("2_run")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -18,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.07, 0.09, 0.12, 1)
+color = Color(0.06, 0.08, 0.07, 1)
 
 [node name="RootMargin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -27,65 +29,109 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 48
-theme_override_constants/margin_top = 42
-theme_override_constants/margin_right = 48
-theme_override_constants/margin_bottom = 42
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 28
 
 [node name="Layout" type="VBoxContainer" parent="RootMargin"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 
 [node name="Title" type="Label" parent="RootMargin/Layout"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 36
 text = "Balatro Logic Prototype"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="RootMargin/Layout"]
+[node name="Stats" type="Label" parent="RootMargin/Layout"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "Godot 4.6 Mono · C# stable runtime · GDScript hot-update rules · SDD workflow"
+text = "Score 0 / 300 | Hands 4 | Discards 3 | Deck 52"
 horizontal_alignment = 1
 
-[node name="Panel" type="PanelContainer" parent="RootMargin/Layout"]
+[node name="MainPanel" type="HBoxContainer" parent="RootMargin/Layout"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 16
 
-[node name="PanelMargin" type="MarginContainer" parent="RootMargin/Layout/Panel"]
+[node name="LeftPanel" type="PanelContainer" parent="RootMargin/Layout/MainPanel"]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 22
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 22
+size_flags_horizontal = 3
 
-[node name="PanelLayout" type="VBoxContainer" parent="RootMargin/Layout/Panel/PanelMargin"]
+[node name="LeftMargin" type="MarginContainer" parent="RootMargin/Layout/MainPanel/LeftPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="LeftLayout" type="VBoxContainer" parent="RootMargin/Layout/MainPanel/LeftPanel/LeftMargin"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Status" type="Label" parent="RootMargin/Layout/Panel/PanelMargin/PanelLayout"]
+[node name="HandTitle" type="Label" parent="RootMargin/Layout/MainPanel/LeftPanel/LeftMargin/LeftLayout"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "Runtime ready"
+text = "Hand - select up to 5 cards"
 
-[node name="Description" type="RichTextLabel" parent="RootMargin/Layout/Panel/PanelMargin/PanelLayout"]
+[node name="CardsGrid" type="GridContainer" parent="RootMargin/Layout/MainPanel/LeftPanel/LeftMargin/LeftLayout"]
+layout_mode = 2
+columns = 4
+
+[node name="Actions" type="HBoxContainer" parent="RootMargin/Layout/MainPanel/LeftPanel/LeftMargin/LeftLayout"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PlayButton" type="Button" parent="RootMargin/Layout/MainPanel/LeftPanel/LeftMargin/LeftLayout/Actions"]
+layout_mode = 2
+custom_minimum_size = Vector2(150, 44)
+text = "Play Hand"
+
+[node name="DiscardButton" type="Button" parent="RootMargin/Layout/MainPanel/LeftPanel/LeftMargin/LeftLayout/Actions"]
+layout_mode = 2
+custom_minimum_size = Vector2(150, 44)
+text = "Discard"
+
+[node name="NewRunButton" type="Button" parent="RootMargin/Layout/MainPanel/LeftPanel/LeftMargin/LeftLayout/Actions"]
+layout_mode = 2
+custom_minimum_size = Vector2(150, 44)
+text = "New Run"
+
+[node name="RightPanel" type="PanelContainer" parent="RootMargin/Layout/MainPanel"]
+layout_mode = 2
+size_flags_horizontal = 2
+custom_minimum_size = Vector2(360, 0)
+
+[node name="RightMargin" type="MarginContainer" parent="RootMargin/Layout/MainPanel/RightPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="RightLayout" type="VBoxContainer" parent="RootMargin/Layout/MainPanel/RightPanel/RightMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="JokerTitle" type="Label" parent="RootMargin/Layout/MainPanel/RightPanel/RightMargin/RightLayout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Jokers"
+
+[node name="Jokers" type="RichTextLabel" parent="RootMargin/Layout/MainPanel/RightPanel/RightMargin/RightLayout"]
+layout_mode = 2
+custom_minimum_size = Vector2(320, 90)
+bbcode_enabled = true
+fit_content = true
+
+[node name="LogTitle" type="Label" parent="RootMargin/Layout/MainPanel/RightPanel/RightMargin/RightLayout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Score Log"
+
+[node name="Log" type="RichTextLabel" parent="RootMargin/Layout/MainPanel/RightPanel/RightMargin/RightLayout"]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[b]Current scaffold[/b]\n- Visible Godot startup scene\n- C# rule engine and state model compile successfully\n- GDScript joker rules are ready for hot-update loading\n- Specs and golden cases live under content/specs and content/tests\n\nNext milestone: wire this UI to the C# GameBootstrap simulation and show evaluated hand results."
-fit_content = true
-
-[node name="ButtonRow" type="HBoxContainer" parent="RootMargin/Layout"]
-layout_mode = 2
-alignment = 1
-theme_override_constants/separation = 16
-
-[node name="StartButton" type="Button" parent="RootMargin/Layout/ButtonRow"]
-layout_mode = 2
-custom_minimum_size = Vector2(180, 44)
-text = "Run Sample"
-
-[node name="QuitButton" type="Button" parent="RootMargin/Layout/ButtonRow"]
-layout_mode = 2
-custom_minimum_size = Vector2(180, 44)
-text = "Quit"
+scroll_active = true

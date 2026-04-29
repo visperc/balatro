@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "id": "joker_greedy",
     "name": "Greedy Joker",
@@ -13,6 +13,30 @@
     "rarity": "common",
     "cost": 3,
     "script": "rules/jokers/joker_flat_bonus.gd",
+    "triggers": ["OnHandPlayed"]
+  },
+  {
+    "id": "joker_pair_mult",
+    "name": "Pair Mult Joker",
+    "rarity": "common",
+    "cost": 4,
+    "script": "rules/jokers/joker_pair_mult.gd",
+    "triggers": ["OnHandPlayed"]
+  },
+  {
+    "id": "joker_face_chips",
+    "name": "Face Chips Joker",
+    "rarity": "common",
+    "cost": 4,
+    "script": "rules/jokers/joker_face_chips.gd",
+    "triggers": ["OnCardScored"]
+  },
+  {
+    "id": "joker_flush_xmult",
+    "name": "Flush XMult Joker",
+    "rarity": "uncommon",
+    "cost": 7,
+    "script": "rules/jokers/joker_flush_xmult.gd",
     "triggers": ["OnHandPlayed"]
   }
 ]

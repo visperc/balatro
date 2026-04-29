@@ -1,17 +1,14 @@
 extends RefCounted
 
 func get_id() -> String:
-	return "joker_greedy"
+	return "joker_pair_mult"
 
 func get_trigger() -> String:
-	return "OnCardScored"
+	return "OnHandPlayed"
 
 func execute(ctx: Dictionary) -> Dictionary:
-	var bonus := 0
-	for card in ctx.get("scoring_cards", []):
-		var suit := str(card.get("suit", "")).to_lower()
-		if suit == "hearts":
-			bonus += 4
+	var hand_kind := str(ctx.get("hand_kind", ""))
+	var bonus := 8 if hand_kind == "Pair" else 0
 	return {
 		"chips_delta": 0,
 		"mult_delta": bonus,

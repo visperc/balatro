@@ -1,20 +1,20 @@
 extends RefCounted
 
 func get_id() -> String:
-	return "joker_greedy"
+	return "joker_face_chips"
 
 func get_trigger() -> String:
 	return "OnCardScored"
 
 func execute(ctx: Dictionary) -> Dictionary:
-	var bonus := 0
+	var chips := 0
 	for card in ctx.get("scoring_cards", []):
-		var suit := str(card.get("suit", "")).to_lower()
-		if suit == "hearts":
-			bonus += 4
+		var rank := int(card.get("rank", 0))
+		if rank >= 11 and rank <= 13:
+			chips += 10
 	return {
-		"chips_delta": 0,
-		"mult_delta": bonus,
+		"chips_delta": chips,
+		"mult_delta": 0,
 		"xmult_factor": 1.0,
 		"events": []
 	}
