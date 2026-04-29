@@ -2,7 +2,90 @@
 
 [ext_resource type="Script" path="res://scripts/autoload/main_scene.gd" id="1_main"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_main")
 
-[node name="RuntimeRoot" type="Node" parent="."]
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07, 0.09, 0.12, 1)
+
+[node name="RootMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 42
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 42
+
+[node name="Layout" type="VBoxContainer" parent="RootMargin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="RootMargin/Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Balatro Logic Prototype"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="RootMargin/Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Godot 4.6 Mono · C# stable runtime · GDScript hot-update rules · SDD workflow"
+horizontal_alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="RootMargin/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelMargin" type="MarginContainer" parent="RootMargin/Layout/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 22
+
+[node name="PanelLayout" type="VBoxContainer" parent="RootMargin/Layout/Panel/PanelMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Status" type="Label" parent="RootMargin/Layout/Panel/PanelMargin/PanelLayout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Runtime ready"
+
+[node name="Description" type="RichTextLabel" parent="RootMargin/Layout/Panel/PanelMargin/PanelLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[b]Current scaffold[/b]\n- Visible Godot startup scene\n- C# rule engine and state model compile successfully\n- GDScript joker rules are ready for hot-update loading\n- Specs and golden cases live under content/specs and content/tests\n\nNext milestone: wire this UI to the C# GameBootstrap simulation and show evaluated hand results."
+fit_content = true
+
+[node name="ButtonRow" type="HBoxContainer" parent="RootMargin/Layout"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 16
+
+[node name="StartButton" type="Button" parent="RootMargin/Layout/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 44)
+text = "Run Sample"
+
+[node name="QuitButton" type="Button" parent="RootMargin/Layout/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(180, 44)
+text = "Quit"
