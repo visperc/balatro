@@ -1,0 +1,17 @@
+﻿{
+  "name": "greedy_joker_two_hearts",
+  "seed": 12345,
+  "jokers": [
+    { "id": "joker_greedy", "rule_id": "joker_greedy", "enabled": true }
+  ],
+  "played_cards": [
+    { "id": "heart_a", "suit": "Hearts", "rank": "Ace" },
+    { "id": "heart_k", "suit": "Hearts", "rank": "King" }
+  ],
+  "expected": {
+    "hand": "HighCard",
+    "chips_delta": 0,
+    "mult_delta": 8,
+    "xmult_factor": 1.0
+  }
+}

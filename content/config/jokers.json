@@ -1,0 +1,18 @@
+﻿[
+  {
+    "id": "joker_greedy",
+    "name": "Greedy Joker",
+    "rarity": "common",
+    "cost": 5,
+    "script": "rules/jokers/joker_greedy.gd",
+    "triggers": ["OnCardScored"]
+  },
+  {
+    "id": "joker_flat_bonus",
+    "name": "Flat Bonus Joker",
+    "rarity": "common",
+    "cost": 3,
+    "script": "rules/jokers/joker_flat_bonus.gd",
+    "triggers": ["OnHandPlayed"]
+  }
+]
